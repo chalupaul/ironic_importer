@@ -76,7 +76,7 @@ def load_auth_clients():
     nv_client = nova_client.Client(2, session=ks_sess)
     CLIENTS['nova'] = nv_client
 
-    ir_client = ironic_client.get_client(1, insecure=True, os_ironic_api_version='1.4.6', **auth_fields)
+    ir_client = ironic_client.get_client(1, insecure=True, os_ironic_api_version='1.46', **auth_fields)
     CLIENTS['ironic'] = ir_client
 
     ins_client = ironic_inspector_client.ClientV1(session=ks_sess)
