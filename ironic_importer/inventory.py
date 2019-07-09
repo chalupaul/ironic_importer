@@ -76,7 +76,7 @@ def load_auth_clients():
     nv_client = nova_client.Client(2, session=ks_sess)
     CLIENTS['nova'] = nv_client
 
-    ir_client = ironic_client.get_client(1, insecure=True, **auth_fields)
+    ir_client = ironic_client.get_client(1.46, insecure=True, **auth_fields)
     CLIENTS['ironic'] = ir_client
 
     ins_client = ironic_inspector_client.ClientV1(session=ks_sess)
@@ -140,7 +140,6 @@ def process_node(node):
             }
         }
     print(ironic_vars)
-    print(help(ironic.node.create))
     ir_node = ironic.node.create(**ironic_vars)
     print("Created node %s" % (node['hostname']))
     ir_port_vars = {
