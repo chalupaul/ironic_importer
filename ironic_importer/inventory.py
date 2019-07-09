@@ -126,14 +126,13 @@ def process_node(node):
     ironic_vars = {
         'name': node['hostname'],
         'driver': 'ipmi',
+        'resource_class': node['flavor'],
         'driver_info': {
             'ipmi_address': node['ipv4'],
             'ipmi_password': node['password'],
             'ipmi_username': node['username'],
-            # TODO: yank those uuids from something
             'deploy_kernel': IR_KERNEL_IMAGE,
             'deploy_ramdisk': IR_INITRD_IMAGE,
-            'resource_class': node['flavor'],
             },
         'properties': {
             'capabilities': 'boot_option:local,disk_label:gpt',
