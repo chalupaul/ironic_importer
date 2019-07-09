@@ -124,9 +124,9 @@ def get_safe_resource_name(flavor_name):
 def process_node(node):
     ironic = CLIENTS['ironic']
     ironic_vars = {
+        'resource_class': node['flavor'],
         'name': node['hostname'],
         'driver': 'ipmi',
-        'resource_class': node['flavor'],
         'driver_info': {
             'ipmi_address': node['ipv4'],
             'ipmi_password': node['password'],
@@ -139,6 +139,8 @@ def process_node(node):
             'cpu_arch': 'x86_64'
             }
         }
+    print(ironic_vars)
+    print(help(ironic.node.create))
     ir_node = ironic.node.create(**ironic_vars)
     print("Created node %s" % (node['hostname']))
     ir_port_vars = {
