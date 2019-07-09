@@ -224,7 +224,7 @@ def main():
             print("Created baremetal flavor %s" % (fl.name))
 
     api_nodes = [node.name for node in CLIENTS['ironic'].node.list()]
-    pool_limit = 2
+    pool_limit = 8
     pool = gevent.pool.Pool(pool_limit)
     queue = gevent.queue.Queue()
     return_queue = gevent.queue.Queue()
