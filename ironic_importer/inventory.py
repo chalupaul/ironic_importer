@@ -139,7 +139,6 @@ def process_node(node):
             'cpu_arch': 'x86_64'
             }
         }
-    print(ironic_vars)
     ir_node = ironic.node.create(**ironic_vars)
     print("Created node %s" % (node['hostname']))
     ir_port_vars = {
