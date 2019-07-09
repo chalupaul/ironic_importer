@@ -3,6 +3,7 @@ gevent.monkey.patch_all()
 from gevent import pool
 from gevent import queue
 import os
+import time
 import sys
 import urllib3
 from keystoneauth1.identity import v3
@@ -148,6 +149,8 @@ def process_node(node):
             }
     ir_port = ironic.port.create(**ir_port_vars)
     print("Created neutron port %s for node %s" % (ir_port.uuid, ir_node.name))
+    # I hate doing this but it is what it is
+    time.sleep(60)
 
     ironic.node.wait_for_provision_state(ir_node.uuid, 'available', 300)
     ironic.node.set_provision_state(ir_node.uuid, 'manage')
