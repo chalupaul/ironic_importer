@@ -152,6 +152,7 @@ def process_node(node):
     gevent.sleep(60)
 
     ironic.node.wait_for_provision_state(ir_node.uuid, 'available', 300)
+    print("LOOK OUT FOR: " + ironic.node.get(ir_node.uuid).provision_state)
     ironic.node.set_provision_state(ir_node.uuid, 'manage')
     gevent.sleep(10)
     ironic.node.wait_for_provision_state(ir_node.uuid, 'manageable', 300)
