@@ -242,5 +242,4 @@ def main():
 
     while not return_queue.empty():
         e = return_queue.get(timeout=0)
-        print("Errors Detected!")
         print("%s: %s" % (e['hostname'], e['message']))
