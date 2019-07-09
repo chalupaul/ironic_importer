@@ -177,9 +177,9 @@ def process_node(node):
         print("Setting boot device to %s on %s" % (target_drive, ir_node.name))
 
 
-def node_worker(queue, return_queue):
+def node_worker(work_queue, return_queue):
     try:
-        node = queue.get(timeout=0)
+        node = work_queue.get(timeout=0)
     except gevent.queue.Empty:
         return
     try:
@@ -232,12 +232,12 @@ def main():
         if node['hostname'] not in api_nodes:
             work_queue.put(node)
 
-    pool.spawn(node_worker, work_queue, return_queue)
+    work_pool.spawn(node_worker, work_queue, return_queue)
 
     while not work_queue.empty() and not work_pool.free_count == pool_limit:
         gevent.sleep(0.1)
         for x in range(0, min(queue.qsize(), work_pool.free_count())):
-            work_pool.spawn(node_worker, queue, return_queue)
+            work_pool.spawn(node_worker, work_queue, return_queue)
 
     work_pool.join()
 
