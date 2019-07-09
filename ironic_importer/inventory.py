@@ -184,7 +184,7 @@ def node_worker(work_queue, return_queue):
     try:
         process_node(node)
     except Exception as e:
-        return_queue.put({'hostname': node['hostname'], 'message': e.message})
+        return_queue.put({'hostname': node['hostname'], 'message': str(e)})
 
 
 def main():
