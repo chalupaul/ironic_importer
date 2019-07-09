@@ -236,7 +236,7 @@ def main():
 
     while not work_queue.empty() and not work_pool.free_count == pool_limit:
         gevent.sleep(0.1)
-        for x in range(0, min(queue.qsize(), work_pool.free_count())):
+        for x in range(0, min(work_queue.qsize(), work_pool.free_count())):
             work_pool.spawn(node_worker, work_queue, return_queue)
 
     work_pool.join()
