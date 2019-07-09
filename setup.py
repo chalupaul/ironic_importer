@@ -24,7 +24,7 @@ with open(path.join(here, 'README.md'), encoding='utf8' ) as f:
 
 setup(
         name='ironic_inventory',
-        version='0.9.0',
+        version='0.9.1',
         description='Register ironic nodes via excel spreadsheet',
         long_description=long_description,
         long_description_content_type='text/markdown',
@@ -33,9 +33,6 @@ setup(
         author_email='paul.sims@rackspace.com',
         classifiers=[
             'Development Status :: 3 - Alpha',
-            'Intended Audience :: Operators',
-            'Topic :: Openstack :: Ironic',
-            'License :: OSI Approved :: Apache2',
             'Programming Language :: Python :: 3',
             ],
         keywords="ironic node registration",
