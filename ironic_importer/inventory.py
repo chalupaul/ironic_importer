@@ -151,7 +151,7 @@ def process_node(node):
     # I hate doing this but it is what it is
     gevent.sleep(60)
 
-    ironic.node.wait_for_provision_state(ir_node.uuid, 'available', 300)
+    ironic.node.wait_for_provision_state(ir_node.uuid, 'enroll', 300)
     ironic.node.set_provision_state(ir_node.uuid, 'manage')
     gevent.sleep(10)
     ironic.node.wait_for_provision_state(ir_node.uuid, 'manageable', 300)
