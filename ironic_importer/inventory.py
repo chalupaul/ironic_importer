@@ -141,7 +141,6 @@ def process_node(node):
             }
         }
     ir_node = ironic.node.create(**ironic_vars)
-    print(dir(ironic.node))
     print("Created node %s" % (node['hostname']))
     ir_port_vars = {
             "address": node['mac'],
