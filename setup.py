@@ -28,7 +28,7 @@ setup(
         install_requires=[
             'pandas',
             'xlrd',
-            'gevent',
+            'gevent==1.4.0',
             'python-ironicclient',
             'python-ironic_inspector_client',
             'python-keystoneclient',

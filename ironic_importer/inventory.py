@@ -1,6 +1,7 @@
 import gevent.monkey
-import gevent.pool
-import gevent.queue
+gevent.monkey.patch_all()
+from gevent import pool
+from gevent import queue
 import os
 import sys
 import urllib3
@@ -14,7 +15,6 @@ from novaclient import client as nova_client
 import glanceclient
 import argparse
 
-gevent.monkey.patch_all()
 
 # We don't need no security
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -225,21 +225,21 @@ def main():
 
     api_nodes = [node.name for node in CLIENTS['ironic'].node.list()]
     pool_limit = 8
-    pool = gevent.pool.Pool(pool_limit)
-    queue = gevent.queue.Queue()
+    work_pool = gevent.pool.Pool(pool_limit)
+    work_queue = gevent.queue.Queue()
     return_queue = gevent.queue.Queue()
     for node in xl_nodes:
         if node['hostname'] not in api_nodes:
-            queue.put(node)
+            work_queue.put(node)
 
-    pool.spawn(node_worker, queue, return_queue)
+    pool.spawn(node_worker, work_queue, return_queue)
 
-    while not queue.empty() and not pool.free_count == pool_limit:
+    while not work_queue.empty() and not work_pool.free_count == pool_limit:
         gevent.sleep(0.1)
-        for x in range(0, min(queue.qsize(), pool.free_count())):
-            pool.spawn(node_worker, queue, return_queue)
+        for x in range(0, min(queue.qsize(), work_pool.free_count())):
+            work_pool.spawn(node_worker, queue, return_queue)
 
-    pool.join()
+    work_pool.join()
 
     while not return_queue.empty():
         e = return_queue.get(timeout=0)
