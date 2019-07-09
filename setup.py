@@ -29,11 +29,11 @@ setup(
             'pandas',
             'xlrd',
             'gevent==1.4.0',
-            'python-ironicclient',
-            'python-ironic_inspector_client',
-            'python-keystoneclient',
-            'python-novaclient',
-            'python-glanceclient',
+            'python-ironicclient==2.7.2',
+            'python-ironic_inspector_client==3.5.0',
+            'python-keystoneclient==3.19.0',
+            'python-novaclient==13.0.1',
+            'python-glanceclient==2.16.0',
             ],
         entry_points={
             'console_scripts': [
