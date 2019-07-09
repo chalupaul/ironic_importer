@@ -153,9 +153,11 @@ def process_node(node):
 
     ironic.node.wait_for_provision_state(ir_node.uuid, 'available', 300)
     ironic.node.set_provision_state(ir_node.uuid, 'manage')
+    gevent.sleep(10)
     ironic.node.wait_for_provision_state(ir_node.uuid, 'manageable', 300)
     print("Managed node %s" % (ir_node.name))
     ironic.node.set_provision_state(ir_node.uuid, 'inspect')
+    gevent.sleep(10)
     print("Inspecting node %s" % (ir_node.name))
     ironic.node.wait_for_provision_state(ir_node.uuid, 'manageable', 3600)
     print("Inspection complete for node %s" % (ir_node.name))
