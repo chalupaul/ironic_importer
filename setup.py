@@ -24,6 +24,7 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.md'), encoding='utf8' ) as f:
     long_description = f.read()
 
+SCRIPT_NAME = ironic-inventory
 
 class install_and_symlink_script(install):
     """Do normal install, but symlink script to project directory"""
@@ -75,7 +76,7 @@ setup(
         data_files=[('examples', ['examples/ironic_nodes.xlsx'])],
         entry_points={
             'console_scripts': [
-                'ironic-inventory=ironic_importer.inventory:main',
+                '%s=ironic_importer.inventory:main' % (SCRIPT_NAME),
                 ]
             },
         cmdclass={
