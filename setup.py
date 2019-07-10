@@ -54,7 +54,7 @@ class install_and_symlink_script(install):
 
 setup(
         name='ironic_inventory',
-        version='0.9.1',
+        version='0.9.2',
         description='Register ironic nodes via excel spreadsheet',
         long_description=long_description,
         long_description_content_type='text/markdown',
