@@ -15,6 +15,7 @@
 """
 
 from setuptools import setup, find_packages
+from setuptools.command.install import install
 from os import path
 
 here = path.abspath(path.dirname(__file__))
