@@ -43,8 +43,6 @@ class install_and_symlink_script(install):
         project_path = locate_project_path()                         
         symlink_path = os.path.join(project_path, "bin", SCRIPT_NAME)
 
-        print("creating %s script symlink" % SCRIPT_NAME)            
-
         if os.path.lexists(symlink_path):                             
             print("removing existing symlink %s" % symlink_path)     
             os.unlink(symlink_path)                                  
