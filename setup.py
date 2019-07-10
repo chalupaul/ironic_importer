@@ -15,12 +15,36 @@
 """
 
 from setuptools import setup, find_packages
+from wheel.paths import get_install_paths
 from os import path
 
 here = path.abspath(path.dirname(__file__))
 
 with open(path.join(here, 'README.md'), encoding='utf8' ) as f:
     long_description = f.read()
+
+
+class install_and_symlink_script(install):
+    """Do normal install, but symlink script to project directory"""
+
+    def run(self):
+        install.run(self)                                             
+
+        wheel_install_paths = get_install_paths(__title__)            
+        script_path = os.path.join(wheel_install_paths['scripts'], SCRIPT_NAME)                  
+        project_path = locate_project_path()                          
+        symlink_path = os.path.join(project_path, "bin", SCRIPT_NAME) 
+
+        print("creating %s script symlink" % SCRIPT_NAME)             
+
+        if os.path.lexists(symlink_path):                             
+            print("removing existing symlink %s" % symlink_path)      
+            os.unlink(symlink_path)                                   
+
+        print("creating symlink from %s to %s" % (                    
+            symlink_path, script_path))                               
+        os.symlink(script_path, symlink_path)           
+
 
 setup(
         name='ironic_inventory',
@@ -51,7 +75,10 @@ setup(
         data_files=[('examples', ['examples/ironic_nodes.xlsx'])],
         entry_points={
             'console_scripts': [
-                'ironic_inventory=ironic_importer.inventory:main',
+                'ironic-inventory=ironic_importer.inventory:main',
                 ]
+            },
+        cmdclass={
+            "install": install_and_symlink_script,
             }
 )
