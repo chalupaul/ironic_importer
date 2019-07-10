@@ -58,7 +58,7 @@ setup(
         description='Register ironic nodes via excel spreadsheet',
         long_description=long_description,
         long_description_content_type='text/markdown',
-        url='https://github.com/rcbops/ironic_inventory',
+        url='https://github.com/chalupaul/ironic_inventory',
         author='paul sims',
         author_email='paul.sims@rackspace.com',
         classifiers=[
