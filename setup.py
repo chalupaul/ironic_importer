@@ -26,7 +26,7 @@ with open(path.join(here, 'README.md'), encoding='utf8' ) as f:
 
 SCRIPT_NAME = "ironic-inventory"
 
-def locate_project_path:
+def locate_project_path():
     if 'PY_PROJECT_PATH' in os.environ:
         return(os.environ['PY_PROJECT_PATH'])
     else:
