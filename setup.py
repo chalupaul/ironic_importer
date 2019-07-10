@@ -14,6 +14,7 @@
    limitations under the License.
 """
 
+import os
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 from os import path
