@@ -14,47 +14,20 @@
    limitations under the License.
 """
 
-import os
 from setuptools import setup, find_packages
-from setuptools.command.install import install
 from os import path
+
+SCRIPT_NAME = 'ironic-importer'
 
 here = path.abspath(path.dirname(__file__))
 
 with open(path.join(here, 'README.md'), encoding='utf8' ) as f:
     long_description = f.read()
 
-SCRIPT_NAME = "ironic-inventory"
-
-def locate_project_path():
-    if 'PY_PROJECT_PATH' in os.environ:
-        return(os.environ['PY_PROJECT_PATH'])
-    else:
-        return('/usr')
-
-
-class install_and_symlink_script(install):
-    """Do normal install, but symlink script to project directory"""
-
-    def run(self):
-        install.run(self)                                             
-
-        script_path = os.path.join(self.install_scripts, SCRIPT_NAME)
-        project_path = locate_project_path()                         
-        symlink_path = os.path.join(project_path, "bin", SCRIPT_NAME)
-
-        if os.path.lexists(symlink_path):                             
-            print("removing existing symlink %s" % symlink_path)     
-            os.unlink(symlink_path)                                  
-
-        print("creating symlink from %s to %s" % (                   
-            symlink_path, script_path))                              
-        os.symlink(script_path, symlink_path)  
-
 
 setup(
         name='ironic_inventory',
-        version='0.9.2',
+        version='0.9.3',
         description='Register ironic nodes via excel spreadsheet',
         long_description=long_description,
         long_description_content_type='text/markdown',
@@ -83,8 +56,5 @@ setup(
             'console_scripts': [
                 '%s=ironic_importer.inventory:main' % (SCRIPT_NAME),
                 ]
-            },
-        cmdclass={
-            "install": install_and_symlink_script,
             }
 )
