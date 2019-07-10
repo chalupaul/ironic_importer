@@ -24,7 +24,7 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.md'), encoding='utf8' ) as f:
     long_description = f.read()
 
-SCRIPT_NAME = ironic-inventory
+SCRIPT_NAME = "ironic-inventory"
 
 class install_and_symlink_script(install):
     """Do normal install, but symlink script to project directory"""
