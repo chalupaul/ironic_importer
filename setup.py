@@ -26,12 +26,12 @@ with open(path.join(here, 'README.md'), encoding='utf8' ) as f:
 
 
 setup(
-        name='ironic_inventory',
-        version='0.9.3',
+        name='ironic_importer',
+        version='1.0.0',
         description='Register ironic nodes via excel spreadsheet',
         long_description=long_description,
         long_description_content_type='text/markdown',
-        url='https://github.com/chalupaul/ironic_inventory',
+        url='https://github.com/chalupaul/ironic_importer',
         author='paul sims',
         author_email='paul.sims@rackspace.com',
         classifiers=[
